@@ -1,5 +1,5 @@
 body{
-    background-color: aliceblue;
+    font-family: "Plus Jakarta Sans", sans-serif !important;
 }
 
 /* NAvbar */
@@ -49,4 +49,38 @@ body{
     flex-wrap:wrap;
     justify-content: center;
     align-items: space-evenly;
+}
+
+/* Cards */
+.card{
+    border:none !important;
+    margin-bottom: 2rem !important;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    width:100% !important;
+    object-fit: cover !important;
+}
+
+.card-body{
+    padding:0 !important;
+}
+
+.card-text {
+    font-weight: 400;
+}
+
+.listing-link{
+    text-decoration: none;
+}
+
+/* Overlay Effect(Card) */
+.card-img-overlay{
+    opacity:0;
+}
+
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
 }
