@@ -118,7 +118,7 @@ app.all("*",(req,res,next)=>{
 //ERROR HANDLING MIDDLEWARE
 app.use((err,req,res,next)=>{
     let{status=500,message="something went wrong"} = err;
-    res.status(status).send(message);
+    res.status(status).render("error.ejs",{message});
 })
 
 app.listen(8080,()=>{
