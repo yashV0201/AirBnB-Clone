@@ -7,6 +7,7 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const listings= require("./routes/listings.js")
 const reviews = require("./routes/reviews.js");
+const session = require("express-session");
 
 
 app.set("view engine","ejs");
@@ -15,6 +16,15 @@ app.use(express.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"public")));
+
+const sessionOptions = {
+    secret:"mySecret",
+    resave:false,
+    saveUninitialized: true
+};
+
+app.use(session(sessionOptions));
+
 
 
 main().then(()=>{
