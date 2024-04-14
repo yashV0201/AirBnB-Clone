@@ -1,3 +1,1 @@
-if(result.error){
-        throw new ExpressError(400,result.error);
-    }
+const Listing = require("./models/listing.js");
