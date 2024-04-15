@@ -12,6 +12,7 @@ const flash = require("connect-flash");
 const passport = require('passport');
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js")
+const users =require("./routes/users.js");
 
 
 app.set("view engine","ejs");
@@ -46,9 +47,7 @@ async function main(){
     await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
 }
 
-app.get("/",(req,res)=>{
-    res.send("root working fine")
-});
+
 
 
 app.use(session(sessionOptions));
@@ -69,21 +68,25 @@ app.use((req,res,next)=>{
     next();
 })
 
-app.get("/demouser", async (req,res)=>{
-    let fakeUser = new User({
-        email:"kkk@gmail.com",
-        username:"delta-stu"
-    })
+// app.get("/demouser", async (req,res)=>{
+//     let fakeUser = new User({
+//         email:"kkk@gmail.com",
+//         username:"delta-stu"
+//     })
 
-    let registeredUser = await User.register(fakeUser,"ossumm");
-    res.send(registeredUser);
-})
+//     let registeredUser = await User.register(fakeUser,"ossumm");
+//     res.send(registeredUser);
+// })
 
 //LISTINGS
 app.use("/listings",listings);
 
 //REVIEWS
 app.use("/listings/:id/reviews",reviews);
+
+//Users
+app.use("/",users);
+
 
 
 /* Error Handling */

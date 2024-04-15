@@ -119,3 +119,9 @@ body{
     padding-left: 0;
     padding-right: 0;
 }
+
+/* Signup page */
+.signup-btn{
+    background-color: green !important;
+    border:none !important;
+}
