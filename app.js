@@ -14,14 +14,12 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user.js")
 const users =require("./routes/users.js");
 
-
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"public")));
-
 
 const sessionOptions = {
     secret:"mySecret",
@@ -34,9 +32,6 @@ const sessionOptions = {
     }
 };
 
-
-
-
 main().then(()=>{
     console.log("Connected to DB");
 }).catch(err=>{
@@ -46,9 +41,6 @@ main().then(()=>{
 async function main(){
     await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
 }
-
-
-
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -60,24 +52,12 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
-
 app.use((req,res,next)=>{
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     res.locals.currUser = req.user;
     next();
 })
-
-// app.get("/demouser", async (req,res)=>{
-//     let fakeUser = new User({
-//         email:"kkk@gmail.com",
-//         username:"delta-stu"
-//     })
-
-//     let registeredUser = await User.register(fakeUser,"ossumm");
-//     res.send(registeredUser);
-// })
 
 //LISTINGS
 app.use("/listings",listings);
@@ -87,8 +67,6 @@ app.use("/listings/:id/reviews",reviews);
 
 //Users
 app.use("/",users);
-
-
 
 /* Error Handling */
 //page not found error
