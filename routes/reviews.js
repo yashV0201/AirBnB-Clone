@@ -10,10 +10,12 @@ const {isLoggedIn,validateReview} = require("../middleware.js");
 
 
 //POST Review ROUTE
-router.post("/",validateReview, wrapAsync(async (req, res)=>{
+router.post("/",isLoggedIn,validateReview, wrapAsync(async (req, res)=>{
     let {id} = req.params;
     let listing = await Listing.findById(id);
     let newReview = new Review(req.body.review);
+    newReview.author = req.user._id;
+    console.log(newReview);
     listing.reviews.push(newReview);       
 
     await newReview.save();
