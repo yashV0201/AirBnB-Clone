@@ -8,18 +8,17 @@ const { saveRedirectUrl } = require("../middleware.js");
 const userController = require("../controllers/users.js");
 
 //SIGNUP GET
-router.get("/signup",userController.renderSignupForm);
+router.route("/signup")
+    .get(userController.renderSignupForm)
+    .post( wrapAsync(userController.signup));
 
-//REGISTER USER
-router.post("/signup", wrapAsync(userController.signup));
 
-//LOGIN PAGE
-router.get("/login", userController.renderLoginForm);
-
-//POST REQUEST        authenticate user using passport.authenticate function as a middleware
-router.post("/login", saveRedirectUrl,
+router.route("/login")
+    .get(userController.renderLoginForm)
+    .post(saveRedirectUrl,
     passport.authenticate("local", {failureRedirect:"/login", failureFlash:true})
     ,wrapAsync(userController.login));
+
 
 //LOGOUT USER
 router.get("/logout",userController.logout);
