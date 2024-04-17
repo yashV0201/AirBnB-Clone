@@ -2,21 +2,12 @@ const express = require("express");
 const router = express.Router({mergeParams:true});
 const wrapAsync = require("../utils/wrapAsync.js");
 const Listing = require("../models/listing.js");
-const {reviewSchema} = require("../schema.js");
 const ExpressError = require("../utils/ExpressError.js");
 const Review = require("../models/review.js");
-const {isLoggedIn} = require("../middleware.js");
+const {isLoggedIn,validateReview} = require("../middleware.js");
 
 //review validation middleware function
-const validateReview = (req,res,next)=>{
-    let {error} = reviewSchema.validate(req.body); //checking for schema validations and storing the error object
-    if(error){   // if error exists then throw a custom error 
-        let errMsg = error.details.map((el)=>el.message).join(",");
-        throw new ExpressError(400, errMsg);
-    }else{      // if not then move on to next function
-        next();
-    }
-}
+
 
 //POST Review ROUTE
 router.post("/",validateReview, wrapAsync(async (req, res)=>{
