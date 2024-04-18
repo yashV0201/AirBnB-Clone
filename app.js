@@ -1,3 +1,8 @@
+if(process.env.NOSE_ENV != "production"){
+    require("dotenv").config();
+}
+
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -13,6 +18,9 @@ const passport = require('passport');
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js")
 const users =require("./routes/users.js");
+const multer = require("multer");
+const {storage , cloudinary} = require("./cloudConfig.js");
+const upload = multer({storage});
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
