@@ -42,10 +42,26 @@
             </div>
             
 
-            <div class="mb-3">
-                <label for="location" class="form-label">Location</label>
-                <input name="listing[location]" value="<%=listing.location %>" type="text" class="form-control" required>
-                <div class="invalid-feedback">Location should be valid</div>
+            <div class="row">
+                <div class="mb-3 col-md-5">
+                    <label for="location" class="form-label">Location</label>
+                    <input name="listing[location]" value="<%=listing.country%>" type="text"  class="form-control" required>
+                    <div class="invalid-feedback">Location should be valid</div>
+                </div>
+                <div class="mb-3 col-md-7">
+                    <label for="category" class="form-label">Category</label>
+                    <select class="form-select" name="listing[category]">
+                        <option value="rooms" selected>Rooms</option>
+                        <option value="iconic-cities" >Iconic Cities</option>
+                        <option value="mountains">Mountains</option>
+                        <option value="castle">Castle</option>
+                        <option value="amazing-pools">Amazing Pools</option>
+                        <option value="camping">Camping</option>
+                        <option value="farms">Farms</option>
+                        <option value="arctic">Arctic</option>
+                        <option value="domes">Domes</option>
+                    </select>
+                </div>
             </div>
             
             <button class="btn btn-dark mt-3 edit-btn">EDIT</button>

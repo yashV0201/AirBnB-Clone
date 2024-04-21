@@ -19,6 +19,7 @@ router.route("/")
 
 //NEW ROUTE
 router.get("/new",isLoggedIn,listingController.renderNewForm);
+router.get("/filter/:name",listingController.applyFilter);
 
 
 router.route("/:id")

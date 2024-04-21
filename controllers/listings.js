@@ -22,6 +22,7 @@ module.exports.showListings = async (req,res,next)=>{
 module.exports.createListing = async (req,res,next)=>{
     let url = req.file.path;
     let filename = req.file.filename;
+    console.log(req.body.listing)
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
     newListing.image = {url,filename};
@@ -64,4 +65,15 @@ module.exports.destroyListing = async (req,res)=>{
     await Listing.findByIdAndDelete(id);
     req.flash("success","Listing Deleted!");
     res.redirect("/listings");
+}
+
+module.exports.applyFilter = async (req,res)=>{
+    let {name} = req.params;
+    if(name==="trending") res.redirect("/listings");
+    const allListings = await Listing.find({category:name});
+    if(!allListings){
+        req.flash("error","No listing found in this cateogry!");
+        res.redirect("/listings");
+    }
+    res.render("listings/index.ejs",{allListings});
 }

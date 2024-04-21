@@ -125,3 +125,10 @@ body{
     background-color: green !important;
     border:none !important;
 }
+
+
+/* navbar filter links */
+.filter-link{
+    text-decoration: none;
+    color: black;
+}
